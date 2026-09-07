@@ -93,9 +93,12 @@ def step1_face_detection(image_path: str) -> dict:
     return result
 
 
-def step2_web_search(face_crop_path: str, serpapi_key: str) -> dict:
-    utils.banner("STEP 2 — Reverse Image Search (Social Media)")
-    result = search_web(face_crop_path, serpapi_key)
+def step2_web_search(image_path: str, face_crop_path: str, serpapi_key: str) -> dict:
+    utils.banner("STEP 2 -- Reverse Image Search (Social Media)")
+    # Use the full image for better match quality; crop is too small for Google Lens
+    search_image = image_path if os.path.exists(image_path) else face_crop_path
+    utils.info(f"Searching with: {search_image}")
+    result = search_web(search_image, serpapi_key)
 
     if result["success"]:
         top = result["top_match"]
@@ -206,7 +209,7 @@ def run_pipeline(image_path: str, no_blockchain: bool = False) -> None:
     pipeline_result["embedding_hash"] = face_result["embedding_hash"]
 
     # Step 2
-    search_result = step2_web_search(face_result["face_crop_path"], serpapi_key)
+    search_result = step2_web_search(image_path, face_result["face_crop_path"], serpapi_key)
     pipeline_result["web_search"] = {
         "success":      search_result["success"],
         "message":      search_result["message"],
