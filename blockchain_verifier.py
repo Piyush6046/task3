@@ -236,12 +236,12 @@ def verify_on_blockchain(
     if local_hash.lower() == on_chain_hash:
         result["verified"] = True
         result["message"] = (
-            f"✅  VERIFIED — Hash matches on-chain record in block #{block_number}."
+            f"[OK] VERIFIED -- Hash matches on-chain record in block #{block_number}."
         )
         logger.info(result["message"])
     else:
         result["message"] = (
-            f"❌  VERIFICATION FAILED — Hash mismatch.\n"
+            f"[FAILED] VERIFICATION FAILED -- Hash mismatch.\n"
             f"   Local hash   : {local_hash}\n"
             f"   On-chain hash: {on_chain_hash}"
         )

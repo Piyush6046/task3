@@ -1,6 +1,15 @@
+# -*- coding: utf-8 -*-
 """
 Utility helpers shared across the pipeline.
 """
+import sys
+# Force UTF-8 output on Windows so emoji/arrows don't crash
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except AttributeError:
+        pass
 
 import os
 import json
@@ -66,19 +75,19 @@ def banner(text: str) -> None:
 
 
 def success(text: str) -> None:
-    print(f"{GREEN}✅  {text}{RESET}")
+    print(f"{GREEN}[OK]  {text}{RESET}")
 
 
 def warn(text: str) -> None:
-    print(f"{YELLOW}⚠️   {text}{RESET}")
+    print(f"{YELLOW}[!]   {text}{RESET}")
 
 
 def error(text: str) -> None:
-    print(f"{RED}❌  {text}{RESET}")
+    print(f"{RED}[ERR] {text}{RESET}")
 
 
 def info(text: str) -> None:
-    print(f"{CYAN}ℹ️   {text}{RESET}")
+    print(f"{CYAN}[>]   {text}{RESET}")
 
 
 def dim(text: str) -> None:

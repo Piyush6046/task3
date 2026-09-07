@@ -1,18 +1,18 @@
 """
-pipeline.py – Main CLI entrypoint for the Face ID & Blockchain Verification pipeline.
+pipeline.py - Main CLI entrypoint for the Face ID & Blockchain Verification pipeline.
 
 Usage
 -----
-# Full pipeline (face scan → web search → blockchain upload + verify):
+Full pipeline (face scan -> web search -> blockchain upload + verify):
     python pipeline.py --image path/to/face.jpg
 
-# Skip blockchain (useful for testing the face + search steps only):
+Skip blockchain (useful for testing the face + search steps only):
     python pipeline.py --image path/to/face.jpg --no-blockchain
 
-# Re-verify a previous run using a saved tx hash:
+Re-verify a previous run using a saved tx hash:
     python pipeline.py --verify-only output/pipeline_result.json
 
-# Search only (provide a pre-cropped face image):
+Search only (provide a pre-cropped face image):
     python pipeline.py --search-only output/face_crop.png
 """
 
